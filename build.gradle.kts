@@ -17,15 +17,6 @@ android {
         ndk { abiFilters += listOf("armeabi-v7a", "arm64-v8a") }
     }
 
-    // Este bloco faz o Gradle ler o AndroidManifest.xml e os .kt direto da raiz sem pastas!
-    sourceSets {
-        getByName("main") {
-            manifest.srcFile("AndroidManifest.xml")
-            java.srcDirs(".")
-            res.srcDirs("res")
-        }
-    }
-
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
