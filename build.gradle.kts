@@ -9,13 +9,21 @@ android {
 
     defaultConfig {
         applicationId = "com.exemplo.tvlauncher"
-        minSdk = 24            // registerDefaultNetworkCallback exige API 24+
+        minSdk = 24
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
-        // TV Boxes ARM (muitas rodam userspace 32-bit)
         ndk { abiFilters += listOf("armeabi-v7a", "arm64-v8a") }
+    }
+
+    // Este bloco faz o Gradle ler o AndroidManifest.xml e os .kt direto da raiz sem pastas!
+    sourceSets {
+        getByName("main") {
+            manifest.srcFile("AndroidManifest.xml")
+            java.srcDirs(".")
+            res.srcDirs("res")
+        }
     }
 
     compileOptions {
@@ -25,7 +33,7 @@ android {
     kotlinOptions { jvmTarget = "17" }
 
     buildFeatures { compose = true }
-    composeOptions { kotlinCompilerExtensionVersion = "1.5.14" } // compatível com Kotlin 1.9.24
+    composeOptions { kotlinCompilerExtensionVersion = "1.5.14" }
 
     packaging {
         resources.excludes += "/META-INF/{AL2.0,LGPL2.1}"
